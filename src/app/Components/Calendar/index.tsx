@@ -59,13 +59,18 @@ export default function Calendar() {
 
   const {userId} = showUser();
 
+  const isMountedGetDoc = useRef(false);
+  const isMountedDeletDoc = useRef(false);
+  const isMountedGetDeletDoc = useRef(false);
+
+
 
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [times, setTimes] = useState<dadosFire[]>([])
-  const isMounted = useRef(false);
+  
   const [deleteTime, setDeleteTime] = useState<dadosFire[]>([])
-
   const [deleteAShowScheduled, setDeleteAShowScheduled] = useState<dadosUserScheduled[]>([])
+  
   const [schedule, setSchedule] = useState<dadosUserScheduled[]>([])
 
   const [user, setUser] = useState<dadosUser | null>(null);
@@ -131,54 +136,7 @@ export default function Calendar() {
   const today = new Date();
   const nextValidDate = getDay(today) === 0 ? addDays(today, 1) : today;
 
-//pegar criar e fazer arquivos
-
-const getDocument = async ()=>{
-
- try{
-   
-  //pegar todos
-   const getItens = await getDocs(collection(db, 'data'))
-   const docsGet = await getItens.docs.map((itens) =>{
-    const dados = itens.data();
-     return{ 
-       date: dados.date,
-       dateD: dados.dateD,
-       id: dados.id,
-       oitoM: dados.oitoM,
-       oitoMeiaM: dados.oitoMeiaM,
-       noveM: dados.noveM,
-       noveMeiaM: dados.noveMeiaM,
-       dezM: dados.dezM,
-       onzeM: dados.onzeM,
-       onzeMeiaM: dados.onzeMeiaM,
-       duasT: dados.duasT,
-       duasTardeT: dados.duasTardeT,
-       tresT: dados.tresT,
-       tresMeiaT: dados.tresMeiaT,
-       quatroT: dados.quatroT,
-       qutroMeiaT: dados.qutroMeiaT,
-       cincoT: dados.cincoT,
-       cincoMeiaT: dados.cincoMeiaT,
-       seisT: dados.seisT
-
-     } as dadosFire
-  });
-
-  const foundItens = docsGet.filter(item => startDate.toLocaleString().substr(0, 10) === item.date);
-    if (foundItens.length > 0) {
-      setTimes(foundItens);
-
-    } else {
-      await createDocument();
-    }
-
-   }catch(err){
-    console.error('Erro ´Pegar documento:', err)
-  }
-
-}
-
+//pegar ou criar dados
 
 const createDocument = async ()=>{
   try{
@@ -221,14 +179,15 @@ const createDocument = async ()=>{
   });
   
   console.log('Novo documento criado com sucesso:', docRef.id);
-  getDocument();
+  const atual = atualizar + 1;
+  setAtualizar(atual)
   }catch(err){
     console.error('Erro ao criar documento:', err)
   }
 }
 
 useEffect(()=>{
-  if (isMounted.current) {
+  if (isMountedGetDoc.current) {
   const getOrCreate = async ()=>{
     //get itens 
      const getItens = await getDocs(collection(db, 'data'))
@@ -264,7 +223,7 @@ useEffect(()=>{
     const foundTimes = docsGet.filter(item => startDate.toLocaleString().substr(0, 10) === item.date);
     if (foundTimes.length > 0) {
       setTimes(foundTimes);
-
+      console.log('foundTimes');
     } else {
       await createDocument();
     }
@@ -272,14 +231,14 @@ useEffect(()=>{
 
   getOrCreate();
 } else {
-  isMounted.current = true;
+  isMountedGetDoc.current = true;
 }
 },[startDate, atualizar])
 
 
 //deletar datas
 useEffect(() => {
-  if (isMounted.current) {
+  if (isMountedGetDeletDoc.current) {
    const deleteDates = async () => {
      
        const getItens = await getDocs(collection(db, 'data'))
@@ -335,12 +294,12 @@ useEffect(() => {
 
    deleteDates();
   } else {
-    isMounted.current = true;
+    isMountedGetDeletDoc.current = true;
   }
 },[])
 
 useEffect(()=> {
-
+  if (isMountedDeletDoc.current) {
 const deleteDocumentes = async()=>{
   deleteTime.forEach(async (d) =>{
     const currentDate = new Date();
@@ -375,6 +334,10 @@ const deleteDocumentes = async()=>{
 }
 
 deleteDocumentes();
+
+} else {
+  isMountedDeletDoc.current = true;
+}
 },[deleteTime])
 
 //get user By id 
@@ -500,7 +463,6 @@ const handleCancel = async (docId: string, slotKey: string, docTime: string, doc
       )
      }
 
-    {/* lembrar que aq ao colocar console antes do return ele está sendo chamdo infinito */}
      {schedule.map((doc) =>{
       if(doc.userId === userId){
         console.log('pessoal')
