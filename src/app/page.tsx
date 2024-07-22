@@ -8,11 +8,11 @@ import { UserProvider } from "./context";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main className={styles.main} >
       <UserProvider>
         <div>
-          <Calendar/>
           <Login/>
+          <Calendar/>
         </div>      
      </UserProvider>
     </main>

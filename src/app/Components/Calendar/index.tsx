@@ -1,6 +1,6 @@
 'use client'
 import DatePicker, { registerLocale } from "react-datepicker";
-import styles from "../../page.module.css";
+
 import { useEffect, useRef, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { getDay } from "date-fns/getDay";
@@ -10,10 +10,12 @@ import { collection, addDoc, getDocs, query, where, doc, updateDoc, deleteDoc, T
 
 import {db} from '../../../firebase/firebase.js';
 import { showUser } from "@/app/context";
+import './styles.css'
+import { Pole } from "../Pole/index";
+
+
 
 registerLocale('pt-BR', ptBR);
-
-
 
 interface dadosFire{
   date: string,
@@ -63,8 +65,6 @@ export default function Calendar() {
   const isMountedDeletDoc = useRef(false);
   const isMountedGetDeletDoc = useRef(false);
 
-
-
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [times, setTimes] = useState<dadosFire[]>([])
   
@@ -74,10 +74,15 @@ export default function Calendar() {
   const [schedule, setSchedule] = useState<dadosUserScheduled[]>([])
 
   const [user, setUser] = useState<dadosUser | null>(null);
+  const [users, setUsers] = useState<dadosUser []>([]);
+
+  const [selectedKey, setSelectedKey] = useState<string | null>(null);
+
 
   const [selectedSlot, setSelectedSlot] = useState<{docId: string; slotKey: string, value: string} | null>(null);
 
   const [atualizar, setAtualizar] = useState(0);
+
 
   const updateSlot = async (docId: string, slotKey: string, value : string) => {
     const docRef = doc(db, 'data', docId);
@@ -114,6 +119,7 @@ export default function Calendar() {
 
   const getSlotClick = (docId : string, slotKey: string, value: string) =>{
     setSelectedSlot({ docId, slotKey, value });
+    setSelectedKey(slotKey);
   }
 
   const handleConfirm = ()=>{
@@ -223,6 +229,7 @@ useEffect(()=>{
     const foundTimes = docsGet.filter(item => startDate.toLocaleString().substr(0, 10) === item.date);
     if (foundTimes.length > 0) {
       setTimes(foundTimes);
+      setLoading(false);
       console.log('foundTimes');
     } else {
       await createDocument();
@@ -301,6 +308,8 @@ useEffect(() => {
 useEffect(()=> {
   if (isMountedDeletDoc.current) {
 const deleteDocumentes = async()=>{
+
+  if(deleteTime && deleteTime.length > 0){
   deleteTime.forEach(async (d) =>{
     const currentDate = new Date();
     const documentDate = d.dateD;
@@ -314,7 +323,9 @@ const deleteDocumentes = async()=>{
     await deleteDoc(doc(db, 'data', d.id))
   }
    })
+}
 
+if(deleteAShowScheduled && deleteAShowScheduled.length > 0){
   deleteAShowScheduled.forEach(async (d)=>{
      const currentDate = new Date();
      const documentDate = d.dateD;
@@ -330,7 +341,8 @@ const deleteDocumentes = async()=>{
     }
       console.log('deletar');
     })
-    
+  }
+  
 }
 
 deleteDocumentes();
@@ -365,6 +377,26 @@ useEffect(()=>{
   getUsuario();
 
 },[userId])
+
+//get users 
+useEffect(()=>{
+ 
+  const getUsers = async () =>{
+     const getRefU = await getDocs(collection(db, 'users'))
+     const getDocU = await getRefU.docs.map((doc) => {
+      const data = doc.data()
+      return{
+        count : data.count,
+        email : data.email,
+        id: data.id,
+        nome:data.nome,
+        manager: data.manager,
+      } as dadosUser
+     })
+     setUsers(getDocU)
+  }
+  getUsers();
+},[]);
 
 //getScheduled fire base
 
@@ -416,10 +448,36 @@ const handleCancel = async (docId: string, slotKey: string, docTime: string, doc
 
 }
 
+// email 
+
+const sendEmail = async (nome : string, time : string, email : string, id : string, date : string )=>{
+  
+  const subject = 'Cancelar Horario';
+  const body = `Ola ${nome} infelizmente tivemos que cancelar seu agendamento para o dia ${date} as ${time} desculpe pelo incomodo`;
+  
+  const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  try{
+  await deleteDoc(doc(db, 'scheduled', String(id)))
+  const atual = atualizar + 1;
+  setAtualizar(atual)
+  }catch(err){
+    console.log(err)
+  }
+
+
+  window.open(mailtoLink);
+}
+
+//loading
+
+const [loading, setLoading] = useState(true);
 
   return (
-    <main className={styles.main}>
-      <div>
+    
+    <main className="MainCalendar" >
+{loading ? (<div className="backColor"><Pole/></div>):(
+
+      <div className="datepicker">
       <DatePicker
         inline
         dateFormat="dd/MM/yyyy"
@@ -433,71 +491,112 @@ const handleCancel = async (docId: string, slotKey: string, docTime: string, doc
           if( date !== null){
           setStartDate(date)
         }}}
-        
       />             
+
 
      {
       startDate &&(
         <div>
+        
          {times.map(times =>{  console.log('oi'); return(
           <div key={times.date}>
-            
-          <h1>{times.date}</h1>
+          <h3>Horarios disponiveis para {times.date}</h3>
+          <div className="timesDisplays">
           {Object.entries(times).map(([key, value]) => {
             if (key !== 'date' && Array.isArray(value) && value.length === 2 && typeof value[1] === 'boolean' && value[1] === true) {
               console.log('maximo de 16')
+              const isSelected = key === selectedKey;
               return (
-              <div key={key} onClick={()=>getSlotClick(times.id, key, value[0])}>
-              <h1 >
+              
+              <div key={key} onClick={()=>getSlotClick(times.id, key, value[0])}
+              className={isSelected ? 'selected' : 'normalT'}>
+              <p>
                 {value[0]}
-              </h1>
+              </p>
               </div>
+              
             )
             }
             return null;
-          })}              
-          <button onClick={handleConfirm}>Confirmar horario</button>
+          })}    
+          </div>          
+          <button onClick={handleConfirm} className="confirmButtons">Confirmar horario</button>
           </div>
          )})}
         </div>
       )
      }
 
-     {schedule.map((doc) =>{
-      if(doc.userId === userId){
-        console.log('pessoal')
-        return(
-          <div key={doc.id}>
-            <h1>
-              você {doc.nome} reservol o horario {doc.time} para o data {doc.date}
-            </h1>
-            <button onClick={()=>handleCancel(doc.dataId, doc.slotKey, doc.time, doc.id)} >Cancelar horario</button>
-          </div>
-        )
-      } else return null
-     })}
+
     
+<div className="paddingT">
+<h2>Horarios reservados</h2>
+{schedule.filter((doc) => doc.userId === userId).length > 0 ? (
+   <div>
+    {schedule.filter((doc) => doc.userId === userId).map((doc) =>(
+          <div key={doc.id} className="sheduledTime">
+          <h3>
+            você {doc.nome} reservol o horario {doc.time} para o data {doc.date}
+          </h3>
+          <button className="confirmButtons" onClick={()=>handleCancel(doc.dataId, doc.slotKey, doc.time, doc.id)} >Cancelar horario</button>
+        </div>
+    ))}
+   </div>
+):(
+ <h3 className="paddingT-">Você reservou nenhum horario</h3>
+)}
+</div>
 
 
     {user ?(
         user.manager ? (
+          <div className="paddingT">
+            <h2> Reservas para {startDate.toLocaleString().substr(0, 10)}</h2>
+        {schedule.filter((doc) => doc.date == startDate.toLocaleString().substr(0, 10)).length > 0 ?(
           <div>
-            {user.nome}
-          {schedule.map(doc =>{
-            if(doc.date == startDate.toLocaleString().substr(0, 10)){
+          {schedule.filter((doc) => doc.date == startDate.toLocaleString().substr(0, 10) ).map(doc =>{
               console.log('manager');
               return(
-                <div key={doc.id}> {doc.nome} reservol para as {doc.time} e já cortou o cabelo {doc.count}</div>
+                <div key={doc.id} className="sheduledTimeM">
+                  <h3> 
+                    {doc.nome} reservol para as {doc.time} e já cortou o cabelo {doc.count}
+                  </h3>
+                  <button className="confirmButtons" onClick={()=>sendEmail(doc.nome, doc.time, doc.email, doc.id, doc.date)}>Cancelar</button>
+                </div>
               )
-            }else return (<h1>Para esse dia ainda não foi reservado nenhum horario</h1>)
           })}
+          </div>
+        ):(<h2 className="paddingT-">Sem horarios reservados</h2>)}    
+
+      <div className="tabelaContent">
+        <h2>Clientes</h2>     
+        <table className="tabela">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Cortes</th>
+          </tr>
+        </thead>
+        <tbody>
+           {users.map(user =>(
+            <tr key={user.id}>
+              <td>{user.nome}</td>
+              <td>{user.count}</td>
+            </tr>
+           ))}
+        </tbody>
+        </table> 
+        </div>
           </div>
         ) : null
       ):(
         <h1> </h1>
       )}
 
+
+
       </div>
+      )}
     </main>
   );
 }

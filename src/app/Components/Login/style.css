@@ -1,0 +1,85 @@
+.loginContent{
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonLogin{
+    border: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin-top: 7px;
+    cursor: pointer;
+    background-color: white;
+    
+}
+
+
+.buttonImage1{
+    width: 25px;
+    height: 25px;
+    display: flex;
+    margin-left: 12px;
+}
+
+.buttonImage2{
+    width: 25px;
+    height: 25px;
+    display: flex;
+    margin-left: 20px;
+}
+
+.modalLogin{
+    width: 300px;
+    height: 350px;
+    margin: 0 auto;
+    text-align: center;
+    
+}
+
+.modalLogin input{
+    width: 100%;
+    height: 30px;
+    text-align: left;
+    border: 1px solid rgba(0, 0, 0, 0.397);
+    border-radius: 2px;
+}
+.modalLogin h3{
+    text-align-last: left;
+    color: #034694;
+}
+
+.modalLogin p{
+    color: #034694;
+}
+
+.logoName{
+    color: #034694;
+}
+.logo{
+    width: 100px;
+    height: 100px;
+}
+
+.confirmButtons{
+    
+    margin-top: 10px;
+    width: 150px;
+    height: 40px;
+    background-color: #034694;
+    color: white;
+    border: 1px solid white;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: 0.5s;
+}
+
+.confirmButtons:hover{
+    background-color: white;
+    color: #034694;
+    border: 1px solid #034694;
+}

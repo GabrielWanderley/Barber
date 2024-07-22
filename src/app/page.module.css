@@ -1,10 +1,9 @@
 .main {
   margin: 0 auto;
-  max-width: 1200px;
-  width: 800px;
+  height: 100%;
   text-align: center;
   justify-content: center;
   align-items: center;
-
+  background-color:#034694; 
 }
 

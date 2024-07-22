@@ -1,17 +1,20 @@
 
 import { useEffect, useState } from 'react';
-import styles from './login.module.css'
+import './style.css'
 
 import Modal from 'react-modal';
 
 
-import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth, db } from '@/firebase/firebase';
-import { addDoc, collection, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
-import { FacebookAuthProvider } from 'firebase/auth/web-extension';
+import { addDoc, collection, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { showUser } from '@/app/context';
-import { setuid } from 'process';
 
+import logo from '../../../assets/logoas.png'
+import Image from 'next/image';
+
+import sla from '../../../assets/user-interface.png'
+import enter from '../../../assets/enter.png'
 
 
 const customStyles = {
@@ -165,6 +168,8 @@ useEffect(() =>{
 
 },[])
 
+// desconectar 
+
 const desconect = async()=>{
     
     localStorage.removeItem('conect');
@@ -173,14 +178,31 @@ const desconect = async()=>{
     window.location.reload();
 }
 
+
+//resetar Senha 
+
+const actionCodeSettings = {
+  url: 'http://localhost:3000/',
+};
+
+const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
+const [passReset, setPassReset] = useState('');
+
     return(
-        <div>
+        <div className='loginContent'>
 
             <div>
                 { login?(
-                      <button onClick={desconect}>desconectar</button>
+                      <button onClick={desconect} className='buttonLogin'>
+                        <Image src={enter} alt='enter' className='buttonImage2'/>
+                        Desconectar
+                        </button>
                 ):(
-                    <button onClick={openModalLogin}>Logar</button>
+                    <button onClick={openModalLogin} className='buttonLogin'>
+                      <Image src={sla} alt='user' className='buttonImage1'/>
+                      Conectar
+                      </button>
 
                 )}
 
@@ -189,23 +211,29 @@ const desconect = async()=>{
                     onRequestClose={closeModalLogin}
                     style={customStyles}
                     contentLabel="Example Modal"
+                    ariaHideApp={false}
                 >
-                    <div className={styles.modalLogin}>
+                    <div className='modalLogin'>
+                      <div className='logoName'>
+                        <Image src={logo} alt='logo' className='logo'/>
+                        <h2>Barbearia</h2>
+                      </div>
+                      <h3>Email</h3>
                         <input                         
                         type='Email' 
-                        placeholder='Email'
+                        placeholder='Insira seu email'
                         value={email}
                         onChange={(e)=>setEmail(e.target.value)}/>
-
+                        <h3>Senha</h3>
                         <input                       
                         type='password' 
-                        placeholder='Senha'
+                        placeholder='Insira sua senha'
                         value={password}
                         onChange={(e)=> setPassword(e.target.value)}/>
 
                         <p onClick={openPassword}>Esqueci a senha</p>
                         <p onClick={openCreate}>Criar uma conta</p>
-                        <button onClick={conectCount}>Conectar</button>
+                        <button onClick={conectCount} className='confirmButtons'>Conectar</button>
                     </div>
                 </Modal>
             </div>
@@ -215,10 +243,31 @@ const desconect = async()=>{
                     onRequestClose={closeModalPassword}
                     style={customStyles}
                     contentLabel="Example Modal"
+                    ariaHideApp={false}
                 >
-                    <div className={styles.modalLogin}>
-                        <input type='email'/>
-                        <button onClick={closeModalPassword}>Fechar Modal</button>
+                  
+                    <div className='modalLogin'>
+                    <div className='logoName'>
+                        <Image src={logo} alt='logo' className='logo'/>
+                        <h2>Barbearia</h2>
+                      </div>
+                      <h3>Email</h3>
+                        <input type='email'
+                        placeholder='Email'
+                        value={passReset}
+                        onChange={(e) =>setPassReset(e.target.value)}
+                        />
+                        <button className='confirmButtons' onClick={async () => {
+          const success = await sendPasswordResetEmail(
+            passReset,
+            actionCodeSettings
+          );
+          if (success) {
+            alert('Email enviado');
+          }else{
+            alert('Email errado ou conta inexistente')
+          }
+        }}>Mudar a senha</button>
                     </div>
                 </Modal>
 
@@ -227,25 +276,32 @@ const desconect = async()=>{
                     onRequestClose={closeModalCreate}
                     style={customStyles}
                     contentLabel="Example Modal"
+                    ariaHideApp={false}
                 >
-                    <div className={styles.modalLogin}>
+                    <div className='modalLogin'>
+                    <div className='logoName'>
+                        <Image src={logo} alt='logo' className='logo'/>
+                        <h2>Barbearia</h2>
+                      </div>
+                      <h3>Nome e sobrenome</h3>
                         <input 
-                        placeholder='Nome'
+                        placeholder='Insira nome e sobrenome'
                         value={nome}
                         onChange={(e)=> setNome(e.target.value)}
                         />
+                        <h3>Email</h3>
                         <input 
                         type='Email' 
-                        placeholder='Email'
+                        placeholder='Insira seu email'
                         value={email}
                         onChange={(e)=>setEmail(e.target.value)}/>
-
+                        <h3>Senha</h3>
                         <input 
                         type='password' 
-                        placeholder='Senha'
+                        placeholder='Insira sua senha'
                         value={password}
                         onChange={(e)=> setPassword(e.target.value)}/>
-                        <button onClick={prencherCampos}>Criar conta</button>
+                        <button onClick={prencherCampos} className='confirmButtons'>Criar conta</button>
                     </div>
                 </Modal>
 
