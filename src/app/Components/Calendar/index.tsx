@@ -193,7 +193,7 @@ const createDocument = async ()=>{
 }
 
 useEffect(()=>{
-  if (isMountedGetDoc.current) {
+ 
   const getOrCreate = async ()=>{
     //get itens 
      const getItens = await getDocs(collection(db, 'data'))
@@ -237,9 +237,7 @@ useEffect(()=>{
   };
 
   getOrCreate();
-} else {
-  isMountedGetDoc.current = true;
-}
+
 },[startDate, atualizar])
 
 
