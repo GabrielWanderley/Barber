@@ -16,6 +16,10 @@ import Image from 'next/image';
 import sla from '../../../assets/user-interface.png'
 import enter from '../../../assets/enter.png'
 
+import { toast } from 'react-toastify';
+
+import { IconButton, InputAdornment, Input, InputLabel, FormControl } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const customStyles = {
     content: {
@@ -32,6 +36,12 @@ const customStyles = {
   };
 
 export function Login(){
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
 //context
 
@@ -85,7 +95,7 @@ const [
 
 const prencherCampos = async () => {
     if (!email || !password || !nome) {
-      alert('Por favor, preencha todos os campos.');
+      toast.warning('Por favor, preencha todos os campos.');
       return;
     }
 
@@ -108,10 +118,10 @@ const prencherCampos = async () => {
       localStorage.setItem('userId', getRefUser.id);
 
       closeModalCreate();
-      alert('Usuário criado com sucesso');
+      toast.success('Usuário criado com sucesso');
     } catch (error) {
       
-      alert('Erro ao criar conta ou usuário já existe.');
+      toast.error('Erro ao criar conta ou usuário já existe.');
     }
   };
 
@@ -124,7 +134,7 @@ const [
 const conectCount = async () =>{
 
     if (!email || !password) {
-        alert('Por favor, preencha todos os campos.');
+        toast.warning('Por favor, preencha todos os campos.');
         return;
       }
     try{
@@ -146,7 +156,7 @@ const conectCount = async () =>{
        
     } catch (error) {
       
-      alert('Erro ao se conectar');
+      toast.error('Erro ao se conectar');
     }
 
 }
@@ -224,12 +234,23 @@ const [passReset, setPassReset] = useState('');
                         placeholder='Insira seu email'
                         value={email}
                         onChange={(e)=>setEmail(e.target.value)}/>
+
                         <h3>Senha</h3>
                         <input                       
-                        type='password' 
+                        type={showPassword ? 'text' : 'password'}
                         placeholder='Insira sua senha'
                         value={password}
-                        onChange={(e)=> setPassword(e.target.value)}/>
+                        onChange={(e)=> setPassword(e.target.value)}
+                        className='senha'
+                        />
+      <button
+        type="button"
+        className="password-toggle"
+        onClick={handleClickShowPassword}
+      >
+              {showPassword ? <VisibilityOff /> : <Visibility />}
+              </button>
+
 
                         <p onClick={openPassword}>Esqueci a senha</p>
                         <p onClick={openCreate}>Criar uma conta</p>
@@ -263,9 +284,9 @@ const [passReset, setPassReset] = useState('');
             actionCodeSettings
           );
           if (success) {
-            alert('Email enviado');
+            toast.warning('Email enviado');
           }else{
-            alert('Email errado ou conta inexistente')
+            toast.warning('Email errado ou conta inexistente')
           }
         }}>Mudar a senha</button>
                     </div>
@@ -283,24 +304,35 @@ const [passReset, setPassReset] = useState('');
                         <Image src={logo} alt='logo' className='logo'/>
                         <h2>Barbearia</h2>
                       </div>
+
                       <h3>Nome e sobrenome</h3>
                         <input 
                         placeholder='Insira nome e sobrenome'
                         value={nome}
                         onChange={(e)=> setNome(e.target.value)}
                         />
+
                         <h3>Email</h3>
                         <input 
                         type='Email' 
                         placeholder='Insira seu email'
                         value={email}
                         onChange={(e)=>setEmail(e.target.value)}/>
+
                         <h3>Senha</h3>
                         <input 
-                        type='password' 
+                        type={showPassword ? 'text' : 'password'}
                         placeholder='Insira sua senha'
                         value={password}
                         onChange={(e)=> setPassword(e.target.value)}/>
+      <button
+        type="button"
+        className="password-toggle"
+        onClick={handleClickShowPassword}
+      >
+              {showPassword ? <VisibilityOff /> : <Visibility />}
+              </button>
+
                         <button onClick={prencherCampos} className='confirmButtons'>Criar conta</button>
                     </div>
                 </Modal>

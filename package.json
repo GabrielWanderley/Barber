@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.4",
+    "@mui/material": "^5.16.4",
     "date-fns": "^3.6.0",
     "firebase": "^10.12.3",
     "next": "14.2.4",
@@ -16,7 +20,8 @@
     "react-datepicker": "^7.2.0",
     "react-dom": "^18",
     "react-firebase-hooks": "^5.1.1",
-    "react-modal": "^3.16.1"
+    "react-modal": "^3.16.1",
+    "react-toastify": "^10.0.5"
   },
   "devDependencies": {
     "@types/node": "^20",

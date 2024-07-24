@@ -13,6 +13,8 @@ import { showUser } from "@/app/context";
 import './styles.css'
 import { Pole } from "../Pole/index";
 
+import { toast } from 'react-toastify';
+
 
 
 registerLocale('pt-BR', ptBR);
@@ -127,10 +129,10 @@ export default function Calendar() {
     if(selectedSlot){
       updateSlot(selectedSlot.docId, selectedSlot.slotKey, selectedSlot.value)
     }else{
-      alert('escolha um horario')
+      toast.warning('Escolha um horario');
     }
   }else{
-    alert('Porfavor faça login')
+    toast.warning('Porfavor faça login')
   }
   }
  
@@ -437,11 +439,11 @@ const handleCancel = async (docId: string, slotKey: string, docTime: string, doc
     const atual = atualizar + 1;
     setAtualizar(atual)
     
-    alert('Cancelado com sucesso')
+    toast.success('Cancelado com sucesso')
 
 
   }catch(err){
-  alert('erro ao cancelar')
+  toast.error('erro ao cancelar')
   }
 
 }
@@ -473,9 +475,11 @@ const [loading, setLoading] = useState(true);
   return (
     
     <main className="MainCalendar" >
+      
 {loading ? (<div className="backColor"><Pole/></div>):(
 
       <div className="datepicker">
+        <h2 style={{marginBottom:"25px"}}>Faça seu agendamento</h2>
       <DatePicker
         inline
         dateFormat="dd/MM/yyyy"

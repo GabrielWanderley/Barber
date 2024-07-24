@@ -18,7 +18,6 @@
     
 }
 
-
 .buttonImage1{
     width: 25px;
     height: 25px;
@@ -41,6 +40,11 @@
     
 }
 
+.modalLogin p {
+  cursor: pointer;
+  margin-top: 10px;
+}
+
 .modalLogin input{
     width: 100%;
     height: 30px;
@@ -48,6 +52,26 @@
     border: 1px solid rgba(0, 0, 0, 0.397);
     border-radius: 2px;
 }
+
+.senha{
+    width: 100%;
+    padding: 10px;
+    padding-right: 50px; /* Espaço para o botão do ícone */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.password-toggle {
+    position: absolute;
+    
+    right: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
 .modalLogin h3{
     text-align-last: left;
     color: #034694;
