@@ -465,7 +465,8 @@ const sendEmail = async (nome : string, time : string, email : string, id : stri
   }
 
 
-  window.open(mailtoLink);
+  
+  window.location.href = mailtoLink;
 }
 
 //loading
