@@ -232,6 +232,7 @@ useEffect(()=>{
     if (foundTimes.length > 0) {
       setTimes(foundTimes);
       setLoading(false);
+      setLoading2(false);
       console.log('foundTimes');
     } else {
       await createDocument();
@@ -245,7 +246,7 @@ useEffect(()=>{
 
 //deletar datas
 useEffect(() => {
-  if (isMountedGetDeletDoc.current) {
+  
    const deleteDates = async () => {
      
        const getItens = await getDocs(collection(db, 'data'))
@@ -300,9 +301,7 @@ useEffect(() => {
    };
 
    deleteDates();
-  } else {
-    isMountedGetDeletDoc.current = true;
-  }
+
 },[])
 
 useEffect(()=> {
@@ -473,10 +472,15 @@ const sendEmail = async (nome : string, time : string, email : string, id : stri
 
 const [loading, setLoading] = useState(true);
 
+const [loading2, setLoading2] = useState(true);
+
+useEffect(()=>{
+   setLoading2(true)
+},[startDate])
+
   return (
     
     <main className="MainCalendar" >
-      
 {loading ? (<div className="backColor"><Pole/></div>):(
 
       <div className="datepicker">
@@ -501,7 +505,8 @@ const [loading, setLoading] = useState(true);
      {
       startDate &&(
         <div>
-        
+              {loading2 ? (<div className="backColor"><Pole/></div>):(
+         <>
          {times.map(times =>{  console.log('oi'); return(
           <div key={times.date}>
           <h3>Horarios disponiveis para {times.date}</h3>
@@ -527,7 +532,7 @@ const [loading, setLoading] = useState(true);
           <button onClick={handleConfirm} className="confirmButtons">Confirmar horario</button>
           </div>
          )})}
-        </div>
+         </>)}        </div>
       )
      }
 
