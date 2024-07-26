@@ -14,6 +14,7 @@ import './styles.css'
 import { Pole } from "../Pole/index";
 
 import { toast } from 'react-toastify';
+import { ClassNames } from "@emotion/react";
 
 
 
@@ -63,7 +64,6 @@ export default function Calendar() {
 
   const {userId} = showUser();
 
-  const isMountedGetDoc = useRef(false);
   const isMountedDeletDoc = useRef(false);
   const isMountedGetDeletDoc = useRef(false);
 
@@ -480,7 +480,8 @@ const [loading, setLoading] = useState(true);
 {loading ? (<div className="backColor"><Pole/></div>):(
 
       <div className="datepicker">
-        <h2 style={{marginBottom:"25px"}}>Faça seu agendamento</h2>
+        <h2  className="h1F">Faça seu agendamento</h2>
+        <div className="datePickerDiv">
       <DatePicker
         inline
         dateFormat="dd/MM/yyyy"
@@ -495,7 +496,7 @@ const [loading, setLoading] = useState(true);
           setStartDate(date)
         }}}
       />             
-
+       </div>
 
      {
       startDate &&(
@@ -531,7 +532,7 @@ const [loading, setLoading] = useState(true);
      }
 
 
-    
+ <div className="floatLE">   
 <div className="paddingT">
 <h2>Horarios reservados</h2>
 {schedule.filter((doc) => doc.userId === userId).length > 0 ? (
@@ -549,11 +550,14 @@ const [loading, setLoading] = useState(true);
  <h3 className="paddingT-">Você reservou nenhum horario</h3>
 )}
 </div>
+</div>
 
 
     {user ?(
         user.manager ? (
+          
           <div className="paddingT">
+            <div className="floatLD">
             <h2> Reservas para {startDate.toLocaleString().substr(0, 10)}</h2>
         {schedule.filter((doc) => doc.date == startDate.toLocaleString().substr(0, 10)).length > 0 ?(
           <div>
@@ -570,7 +574,7 @@ const [loading, setLoading] = useState(true);
           })}
           </div>
         ):(<h2 className="paddingT-">Sem horarios reservados</h2>)}    
-
+        </div>
       <div className="tabelaContent">
         <h2>Clientes</h2>     
         <table className="tabela">

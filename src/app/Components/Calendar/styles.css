@@ -1,21 +1,172 @@
-
-
 .MainCalendar{
-    background-image: url('../../../assets/iPhone 13 & 14 - 2.png');
-    background-size: cover; /* Ajusta a imagem para cobrir o elemento */
-    background-repeat: no-repeat; /* Impede a repetição da imagem */
-    background-position: center;
+
     max-width: 1200px;
     margin: 0 auto;
     text-align: center;
-    color: white;
+    color: black;
     padding-bottom: 30px;
-    background-color:#034694; 
+    background-color:#d0bfaa; 
+   
+    
+}
+
+.h1F{
+    font-size: 90px;
+    margin-bottom: 25px;
+  }
+
+.backColor{
+    background-color: #d0bfaa;
+    width:1200px;
+    height: 1200px;
+}
+
+.datepicker{
+    padding-top: 50px;
+}
+
+.datePickerDiv{
+    float: left;
+    margin-left: 250px;
+}
+
+.timesDisplays{
+
+   justify-content: center;
+   text-align: center;
+   display: grid;
+   grid-template-columns: repeat(3, 0.1fr); /* Distribui 3 colunas igualmente */
+   gap: 2px;
+   margin-top: 25px;
+   cursor: pointer;
+}
+
+
+
+.selected {
+    font-size: 20px;
+    font-weight: 500;
+    width: 86px;
+    height: 29px;
+    background-color: black;
+    color: #d0bfaa;
+    border-radius: 5px;
+    border: solid 1px black;  
+}
+
+.normalT{
+    font-size: 20px;
+    font-weight: 500;
+    width: 86px;
+    height: 29px;
+    background-color: #d0bfaa;
+    color: black;
+    border-radius: 5px;
+    border: solid 1px black;
+}
+
+.confirmButtons{
+    
+    margin-top: 10px;
+    width: 150px;
+    height: 40px;
+    background-color: black;
+    color: #d0bfaa;
+    border: 1px solid white;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: 0.5s;
+}
+
+.confirmButtons:hover{
+    background-color: black;
+    color: #d0bfaa;
+    border: 1px solid white;
+}
+
+.paddingT{
+  margin-top: 30px;
+}
+
+
+
+
+.paddingT-{
+    margin-top: 20px;
+  }
+
+.sheduledTime{
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10px;
+    max-width: 250px;
+    min-height: 130px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.384);
+}
+
+.sheduledTimeM{
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10px;
+    max-width: 250px;
+    min-height: 130px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.384);
+    color: black;
+}
+
+.tabelaContent{
+    margin: 0 auto;
+    text-align: center;
+    max-width: 500px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+    
+    
+}
+.tabela, th, td{
+    border-collapse: collapse; /*define a separação entre as bordar*/
+    padding: 10px;
+    text-align: left;
+    border: 1px solid rgb(160 160 160);
+    margin: 0 auto;
+    margin-top: 20px;
+    
+}
+th{
+    background-color: white;
+    color: black;
+}
+@media (max-width: 768px){
+.MainCalendar{
+
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    color: black;
+    padding-bottom: 30px;
+    background-color:#d0bfaa; 
     min-height: 900px;
 }
 
+
+.h1F{
+    font-size: 50px;
+    margin-bottom: 25px;
+  }
+
+  .datePickerDiv{
+    float: none;
+    margin-left: 0px;
+}
+
 .backColor{
-    background-color: #034694;
+    background-color: #d0bfaa;
     width:1200px;
     height: 1200px;
 }
@@ -44,19 +195,19 @@
     width: 86px;
     height: 29px;
     background-color: black;
-    color: white;
+    color: #d0bfaa;
     border-radius: 5px;
-    border: solid 1px #034694;  }
+    border: solid 1px black;   }
 
 .normalT{
     font-size: 20px;
     font-weight: 500;
     width: 86px;
     height: 29px;
-    background-color: white;
+    background-color: #d0bfaa;
     color: black;
     border-radius: 5px;
-    border: solid 1px #034694;
+    border: solid 1px black;
 }
 
 .confirmButtons{
@@ -64,8 +215,8 @@
     margin-top: 10px;
     width: 150px;
     height: 40px;
-    background-color: #034694;
-    color: white;
+    background-color: black;
+    color: #d0bfaa;
     border: 1px solid white;
     border-radius: 4px;
     font-size: 14px;
@@ -73,9 +224,18 @@
 }
 
 .confirmButtons:hover{
-    background-color: white;
-    color: #034694;
-    border: 1px solid #034694;
+    background-color: black;
+    color: #d0bfaa;
+    border: 1px solid white;
+}
+
+.floatLE{
+    float: none;
+    margin-left: 0px;
+}
+.floatLD{
+    float: none;
+    margin-right: 0px;
 }
 
 .paddingT{
@@ -130,4 +290,6 @@
 th{
     background-color: white;
     color: black;
+}
+
 }

@@ -1,0 +1,249 @@
+.main {
+  margin: 0 auto;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color:black; 
+  padding-top: 40px;
+}
+
+.content{
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  text-align: center;
+  
+}
+
+.PaperContent{
+  background-color: #d0bfaa;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.paperContentItens{
+  margin: 0 auto;
+  max-width: 1150px;
+  padding-top: 20px;
+}
+
+.floatL{
+  text-align: left;
+}
+
+.floatL h3{
+  padding-top: 25px;
+  margin-left: 50px;
+}
+
+.paperText h1{
+   font-size: 90px;
+   font-weight: 900;
+}
+
+.paperText h3{
+  font-size: 35px;
+}
+
+
+.paperDivText{
+  float: left;
+  width: 300px;
+  margin-top: 20px;
+  background-color: black;
+  color: #d0bfaa;
+  border-radius: 20px;
+  height: 400px;
+  text-align: left;
+}
+
+.paperDivText p{
+  margin: 12px;
+}
+.paperDivText h3{
+  font-size: 26px;
+  margin: 12px;
+  margin-top: 240px;
+}
+
+.fisrtImg{
+  width: 840px; height: 400px; margin-top: 20px; border-radius: 20px;
+}
+
+.contentTextPaper{
+  border-top: 1px solid black;
+  margin-top: 50px;
+}
+.contentTextPaper h1{
+  font-size: 40px;
+  float: left;
+}
+
+.pDiv{
+   width: 800px;
+   margin: 0 auto;
+   text-align: left;
+   margin-left: 320px;
+   font-weight: 500;
+}
+
+
+.cortesImages{
+  margin-top: 50px;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 0.1fr); /* Distribui 3 colunas igualmente */
+  gap: 30px;
+}
+
+.ImageContent1{
+  background-image: url('../assets/77522ba2-9663-45c9-818b-60ebc2b206e1.jpeg');
+  background-size: cover; 
+  background-repeat: no-repeat; 
+   width: 300px;
+   height: 250px;
+   border-radius: 10px;
+}
+
+.ImageContent2{
+  background-image: url('../assets/Latino.jpeg');
+  background-size: cover; 
+  background-repeat: no-repeat; 
+   width: 300px;
+   height: 250px;
+   border-radius: 10px;
+}
+
+.ImageContent3{
+  background-image: url('../assets/O Barbeiro um homem com barba em processo de corte de uma tesoura para o cliente na Barbearia _ Foto Premium.jpeg');
+  background-size: cover; 
+  background-repeat: no-repeat; 
+   width: 300px;
+   height: 250px;
+   border-radius: 10px;
+}
+
+.habilidades h1{
+  color: #d0bfaa;
+  font-size: 90px;
+}
+
+.habilidades h3{
+  color: white;
+  font-weight: 400;
+  font-size: 70px;
+  margin: 15px;
+  padding-top: 35px;
+}
+
+.habilidade1{
+  background-image: url('../assets/barba.jpg');
+  background-size: cover; /* Ajusta a imagem para cobrir o elemento */
+  background-repeat: no-repeat; /* Impede a repetição da imagem */
+  text-align: left;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.habilidade2{
+  background-image: url('../assets/Corte.jpeg');
+  background-repeat: no-repeat; /* Impede a repetição da imagem */
+  background-size: cover;
+  background-position: center;
+  text-align: right;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.habilidade3{
+  background-image: url('../assets/bigode.jpeg');
+  background-size: cover; 
+  background-position: center;
+  text-align: left;
+  height: 200px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 768px){
+
+  .content{
+    width: 100%;
+    margin: 0 auto;
+    max-width: 350px;
+    text-align: center;
+    
+  }
+
+  .paperContentItens{
+
+    max-width: 320px;
+    
+  }
+
+  .paperText h1{
+    font-size: 60px;
+    font-weight: 900;
+ }
+ 
+ .paperText h3{
+   font-size: 20px;
+ }
+
+ .paperDivText{
+
+  float: center;
+  width: 300px;
+  margin-top: 20px;
+  background-color: black;
+  color: #d0bfaa;
+  border-radius: 20px;
+  height: 290px;
+  text-align: left;
+  margin-left: 10px;
+
+}
+.paperDivText h3{
+  font-size: 26px;
+  margin: 12px;
+  margin-top: 100px;
+}
+
+.paperDivText p{
+  margin: 12px;
+  padding-top: 12px;
+}
+.fisrtImg{
+  width: 300px; height: 250px; margin-top: 20px; border-radius: 20px;
+}
+
+.contentTextPaper h1{
+  font-size: 27px;
+  float: left;
+}
+
+.pDiv{
+   width: 300px;
+   text-align: left;
+   margin-left: 0px;
+   font-weight: 500;
+    margin-top: 40px;
+}
+
+.cortesImages{
+  margin-top: 50px;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(1, 0.1fr); /* Distribui 3 colunas igualmente */
+  gap: 30px;
+}
+
+.habilidades h1{
+  font-size: 60px;
+}
+
+
+}
