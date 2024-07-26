@@ -1,10 +1,7 @@
 .barberContainer {
-	width: 84px;
-	height: 306px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+    margin: 0 auto;
+	text-align: right;
+	max-width: 120px;
   }
   
   .ball {
@@ -13,7 +10,7 @@
 	margin-left: 31px;
 	margin-right: 31px;
 	border-radius: 100px;
-	background-color: #fefbe3;
+	background-color: black;
   }
   
   .endCap {
@@ -23,13 +20,13 @@
 	margin-right: 15px;
 	margin-top: 5px;
 	margin-bottom: 5px;
-	background-color: #fefbe3;
+	background-color: black;
   }
   
   .cap {
 	width: 84px;
 	height: 15px;
-	background-color: #fefbe3;
+	background-color: black;
   }
   
   .barberWrap {
@@ -45,11 +42,11 @@
 	height: 172px;
 	width: 54px;
 	position: inherit;
-	background: #fefbe3;
-	background-color: -webkit-linear-gradient(-45deg, transparent 25%, #fefbe3 25%, #fefbe3 50%, transparent 50%, transparent 75%, #fefbe3 75%);
-	background: -moz-linear-gradient(-45deg, transparent 25%, #fefbe3 25%, #fefbe3 50%, transparent 50%, transparent 75%, #fefbe3 75%);
-	background: -o-linear-gradient(-45deg, transparent 25%, #fefbe3 25%, #fefbe3 50%, transparent 50%, transparent 75%, #fefbe3 75%);
-	background: linear-gradient(-45deg, transparent 25%, #fefbe3 25%, #fefbe3 50%, transparent 50%, transparent 75%, #fefbe3 75%);
+	background: black;
+	background-color: -webkit-linear-gradient(-45deg, transparent 25%, black 25%, black 50%, transparent 50%, transparent 75%, black 75%);
+	background: -moz-linear-gradient(-45deg, transparent 25%, black 25%, black 50%, transparent 50%, transparent 75%, black 75%);
+	background: -o-linear-gradient(-45deg, transparent 25%, black 25%, black 50%, transparent 50%, transparent 75%, black 75%);
+	background: linear-gradient(-45deg, transparent 25%, black 25%, black 50%, transparent 50%, transparent 75%, black 75%);
 	background-size: 27px 27px;
 	-webkit-animation: barberpole 1.5s infinite linear;
 	animation: barberpole 1.5s infinite linear;

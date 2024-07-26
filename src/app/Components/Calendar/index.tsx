@@ -14,7 +14,7 @@ import './styles.css'
 import { Pole } from "../Pole/index";
 
 import { toast } from 'react-toastify';
-import { ClassNames } from "@emotion/react";
+
 
 
 
@@ -65,7 +65,6 @@ export default function Calendar() {
   const {userId} = showUser();
 
   const isMountedDeletDoc = useRef(false);
-  const isMountedGetDeletDoc = useRef(false);
 
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [times, setTimes] = useState<dadosFire[]>([])
@@ -87,6 +86,9 @@ export default function Calendar() {
 
 
   const updateSlot = async (docId: string, slotKey: string, value : string) => {
+
+    try{
+
     const docRef = doc(db, 'data', docId);
     await updateDoc(docRef, {
       [slotKey]: [value, false],
@@ -114,9 +116,12 @@ export default function Calendar() {
   } else {
     console.error('userId is undefined or empty');
   }
+  toast.success('Agendado com sucesso')
    const atual = atualizar + 1;
    setAtualizar(atual)
-    
+  }catch(err) {
+    toast.error('Seu horario já foi agendado')
+  }
   }
 
   const getSlotClick = (docId : string, slotKey: string, value: string) =>{
@@ -478,12 +483,22 @@ useEffect(()=>{
    setLoading2(true)
 },[startDate])
 
+
+//locate
+
+useEffect(() => {
+  const elemento = document.getElementById('tb');
+  if (elemento) {
+      elemento.scrollIntoView();
+  }
+}, []);
+
   return (
     
-    <main className="MainCalendar" >
+    <main className="MainCalendar" id='tb'>
 {loading ? (<div className="backColor"><Pole/></div>):(
 
-      <div className="datepicker">
+      <div className="datepicker" >
         <h2  className="h1F">Faça seu agendamento</h2>
         <div className="datePickerDiv">
       <DatePicker

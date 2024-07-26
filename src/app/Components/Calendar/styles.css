@@ -17,8 +17,9 @@
 
 .backColor{
     background-color: #d0bfaa;
-    width:1200px;
-    height: 1200px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .datepicker{
@@ -167,8 +168,10 @@ th{
 
 .backColor{
     background-color: #d0bfaa;
-    width:1200px;
-    height: 1200px;
+    max-width:1200px;
+    margin-left: 50px;
+    padding-top: 20px;
+    height: 100px;
 }
 
 .datepicker{
