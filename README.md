@@ -1,36 +1,30 @@
 
-## O proj![barber](https://github.com/user-attachments/assets/279be5a3-3915-4f8e-8a2a-8eebd51740f4)
-eto
+![barber](https://github.com/user-attachments/assets/1db9d219-c89a-4143-b05f-89b408b55f31)
 
-First, run the development server:
+## 💈 O que é o projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+É um projeto de agendamento de uma barbearia, onde os usuários podem se cadastrar e agendar seus horários, e onde os proprietários podem cancelar horários de clientes através de um email.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔥 Sistema de agendamento
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+![agendamento ](https://github.com/user-attachments/assets/0f6f0e6b-77bb-4de8-b09a-a09246e6c41d)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🖥️ Tecnologias 
+- Next.tsx
+- Firebase
 
-## Learn More
+## 🚀 Download de dependências e atualização de arquivos do projeto
+instalação das dependencias 
+`yarn add .`
+ou
+`npm install`
 
-To learn more about Next.js, take a look at the following resources:
+Inserindo os dados do seu projeto Firebase no arquivo firebase.js:
+![Captura de tela 2024-08-29 094426](https://github.com/user-attachments/assets/522d2339-79c9-40a3-a494-25206d818926)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+##⚡Iniciar projeto 
+Para iniciar o projeto, utilize o comando:
+`yarn dev`
+`yarn start`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![screencapture-localhost-3000-2024-08-29-09_14_27](https://github.com/user-attachments/assets/913bdaa7-8f66-4b85-ba81-1bb285dcadfd)
