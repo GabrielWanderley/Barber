@@ -20,6 +20,8 @@ ou
 `npm install`
 
 Inserindo os dados do seu projeto Firebase no arquivo firebase.js:
+
+<br/>
 ![Captura de tela 2024-08-29 094426](https://github.com/user-attachments/assets/522d2339-79c9-40a3-a494-25206d818926)
 
 ##⚡Iniciar projeto 
