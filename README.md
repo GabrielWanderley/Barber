@@ -1,6 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## O proj![barber](https://github.com/user-attachments/assets/279be5a3-3915-4f8e-8a2a-8eebd51740f4)
+eto
 
 First, run the development server:
 
