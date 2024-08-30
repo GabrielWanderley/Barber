@@ -25,6 +25,7 @@ Inserindo os dados do seu projeto Firebase no arquivo firebase.js:
 
 #⚡Iniciar projeto 
 Para iniciar o projeto, utilize o comando:
+
 `yarn dev`
 
 ![screencapture-localhost-3000-2024-08-29-09_14_27](https://github.com/user-attachments/assets/913bdaa7-8f66-4b85-ba81-1bb285dcadfd)
